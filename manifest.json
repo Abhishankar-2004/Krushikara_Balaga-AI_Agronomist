@@ -1,0 +1,22 @@
+
+{
+  "name": "Krushikara Balaga: AI Agronomist",
+  "short_name": "Krushikara Balaga",
+  "description": "Your smart farming companion for diagnosis, markets, and advisories.",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#16a34a",
+  "icons": [
+    {
+      "src": "https://raw.githubusercontent.com/google-gemini/cookbook/main/website/static/images/project_kisan_icon_192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "https://raw.githubusercontent.com/google-gemini/cookbook/main/website/static/images/project_kisan_icon_512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

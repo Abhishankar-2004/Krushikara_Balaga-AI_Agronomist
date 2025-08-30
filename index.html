@@ -1,0 +1,243 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Krushikara Balaga: AI Agronomist</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="manifest" href="/manifest.json">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      // IMPORTANT: Add your Gemini API key here for the app to work.
+      // This setup simulates a Node.js environment variable for the browser.
+      window.process = {
+        env: {
+          API_KEY: 'YOUR_GEMINI_API_KEY_HERE'
+        }
+      };
+
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+            },
+            colors: {
+              primary: {
+                DEFAULT: '#16a34a', // green-600
+                dark: '#15803d',  // green-700
+                light: '#4ade80', // green-400
+              },
+              secondary: {
+                DEFAULT: '#2563eb', // blue-600
+                dark: '#1d4ed8',   // blue-700
+              },
+              accent: {
+                DEFAULT: '#f59e0b', // amber-500
+              },
+              slate: {
+                '50': '#f8fafc',
+                '100': '#f1f5f9',
+                '200': '#e2e8f0',
+                '300': '#cbd5e1',
+                '400': '#94a3b8',
+                '500': '#64748b',
+                '600': '#475569',
+                '700': '#334155',
+                '800': '#1e293b',
+                '900': '#0f172a',
+                '950': '#020617',
+              }
+            },
+          },
+        },
+      }
+    </script>
+    <style>
+      body {
+        font-family: 'Inter', sans-serif;
+        background-color: #f8fafc; /* slate-50 */
+        background-image: 
+          linear-gradient(#e2e8f0 1px, transparent 1px), /* slate-200 */
+          linear-gradient(to right, #e2e8f0 1px, transparent 1px);
+        background-size: 32px 32px;
+      }
+      .dark body {
+        background-color: #020617; /* slate-950 */
+        background-image: 
+          linear-gradient(#1e293b 1px, transparent 1px), /* slate-800 */
+          linear-gradient(to right, #1e293b 1px, transparent 1px);
+      }
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      .fade-in {
+        animation: fadeIn 0.4s ease-out forwards;
+      }
+      @keyframes cardEnter {
+          from {
+              opacity: 0;
+              transform: scale(0.95) translateY(20px);
+          }
+          to {
+              opacity: 1;
+              transform: scale(1) translateY(0);
+          }
+      }
+      .card-enter {
+          animation: cardEnter 0.4s ease-out backwards;
+      }
+
+      /* Custom Footer Styles */
+      .footer {
+          background-color: #0f172a; /* slate-900 */
+          padding: 70px 0;
+          font-family: 'Poppins', sans-serif;
+          line-height: 1.5;
+      }
+      .footer .container{
+          max-width: 1170px;
+          margin:auto;
+      }
+      .footer .row{
+          display: flex;
+          flex-wrap: wrap;
+      }
+      .footer ul{
+          list-style: none;
+          padding-left: 0;
+      }
+      .footer .footer-col{
+        width: 25%;
+        padding: 0 15px;
+      }
+      .footer .footer-col h4{
+          font-size: 18px;
+          color: #ffffff;
+          text-transform: capitalize;
+          margin-bottom: 35px;
+          font-weight: 500;
+          position: relative;
+      }
+      .footer .footer-col h4::before{
+          content: '';
+          position: absolute;
+          left:0;
+          bottom: -10px;
+          background-color: #16a34a; /* primary color */
+          height: 2px;
+          box-sizing: border-box;
+          width: 50px;
+      }
+      .footer .footer-col ul li:not(:last-child){
+          margin-bottom: 10px;
+      }
+      .footer .footer-col ul li button {
+          font-size: 16px;
+          text-transform: capitalize;
+          text-decoration: none;
+          font-weight: 300;
+          color: #bbbbbb;
+          display: block;
+          transition: all 0.3s ease;
+          background: none;
+          border: none;
+          padding: 0;
+          cursor: pointer;
+          text-align: left;
+          font-family: 'Poppins', sans-serif;
+      }
+      .footer .footer-col ul li button:hover{
+          color: #ffffff;
+          padding-left: 8px;
+      }
+      .footer .footer-col .social-links a{
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          height: 40px;
+          width: 40px;
+          background-color: rgba(255,255,255,0.2);
+          margin:0 10px 10px 0;
+          border-radius: 50%;
+          color: #ffffff;
+          transition: all 0.5s ease;
+      }
+      .footer .footer-col .social-links a:hover{
+          color: #24262b;
+          background-color: #ffffff;
+      }
+
+      /*responsive*/
+      @media(max-width: 767px){
+        .footer .footer-col{
+          width: 50%;
+          margin-bottom: 30px;
+        }
+      }
+      @media(max-width: 574px){
+        .footer .footer-col{
+          width: 100%;
+        }
+      }
+
+      /* Custom scrollbar for horizontal scrolling sections */
+      .overflow-x-auto::-webkit-scrollbar {
+          height: 8px;
+      }
+      .overflow-x-auto::-webkit-scrollbar-track {
+          background: #f1f5f9; /* slate-100 */
+          border-radius: 10px;
+      }
+      .overflow-x-auto::-webkit-scrollbar-thumb {
+          background: #cbd5e1; /* slate-300 */
+          border-radius: 10px;
+      }
+      .overflow-x-auto::-webkit-scrollbar-thumb:hover {
+          background: #94a3b8; /* slate-400 */
+      }
+      .dark .overflow-x-auto::-webkit-scrollbar-track {
+          background: #1e293b; /* slate-800 */
+      }
+      .dark .overflow-x-auto::-webkit-scrollbar-thumb {
+          background: #475569; /* slate-600 */
+      }
+      .dark .overflow-x-auto::-webkit-scrollbar-thumb:hover {
+          background: #64748b; /* slate-500 */
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react-dom/": "https://esm.sh/react-dom@18.2.0/",
+    "react/": "https://esm.sh/react@18.2.0/",
+    "react": "https://esm.sh/react@18.2.0",
+    "@google/genai": "https://esm.sh/@google/genai@^1.8.0",
+    "recharts": "https://esm.sh/recharts@2.12.7?bundle&external=react,react-dom"
+  }
+}
+</script>
+</head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('./sw.js').then(registration => {
+            console.log('ServiceWorker registration successful with scope: ', registration.scope);
+          }, err => {
+            console.log('ServiceWorker registration failed: ', err);
+          });
+        });
+      }
+    </script>
+  </body>
+</html>
