@@ -12,6 +12,8 @@ export enum Feature {
   PROFILE = 'PROFILE',
   ANALYTICS = 'ANALYTICS',
   ABOUT_US = 'ABOUT_US',
+  PRIVACY_POLICY = 'PRIVACY_POLICY',
+  CONTACT_US = 'CONTACT_US',
 }
 
 export interface UserProfile {

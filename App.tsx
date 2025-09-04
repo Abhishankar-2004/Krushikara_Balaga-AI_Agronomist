@@ -1,7 +1,3 @@
-
-
-
-
 import React, { useState, useEffect } from 'react';
 import { Feature, Language, UserProfile } from './types';
 import Dashboard from './components/Dashboard';
@@ -15,6 +11,8 @@ import LoanAdvisor from './components/LoanAdvisor';
 import Profile from './components/Profile';
 import Analytics from './components/Analytics';
 import AboutUs from './components/AboutUs';
+import PrivacyPolicy from './components/PrivacyPolicy';
+import ContactUs from './components/ContactUs';
 import { HomeIcon } from './components/icons/HomeIcon';
 import { LeafIcon } from './components/icons/LeafIcon';
 import { MarketIcon } from './components/icons/MarketIcon';
@@ -34,6 +32,7 @@ import Auth from './components/Auth';
 import { LogoutIcon } from './components/icons/LogoutIcon';
 import { AnalyticsIcon } from './components/icons/AnalyticsIcon';
 import { DashboardIcon } from './components/icons/DashboardIcon';
+import { InfoIcon } from './components/icons/InfoIcon';
 
 
 const App: React.FC = () => {
@@ -41,6 +40,7 @@ const App: React.FC = () => {
   const { language, setLanguage, translate } = useLanguage();
   const { theme, toggleTheme } = useTheme();
   const [isLangDropdownOpen, setIsLangDropdownOpen] = useState(false);
+  const [isResourcesDropdownOpen, setIsResourcesDropdownOpen] = useState(false);
   const { user, logout, updateUser } = useAuth();
 
   const handleProfileUpdate = (newProfile: UserProfile) => {
@@ -76,6 +76,10 @@ const App: React.FC = () => {
         return <Analytics />;
       case Feature.ABOUT_US:
         return <AboutUs />;
+      case Feature.PRIVACY_POLICY:
+        return <PrivacyPolicy />;
+      case Feature.CONTACT_US:
+        return <ContactUs />;
       default:
         return <Dashboard setActiveFeature={setActiveFeature} userProfile={user} />;
     }
@@ -134,6 +138,42 @@ const App: React.FC = () => {
             >
                 {theme === Theme.LIGHT ? <MoonIcon className="w-5 h-5" /> : <SunIcon className="w-5 h-5" />}
             </button>
+             <div className="relative">
+              <button 
+                onClick={() => setIsResourcesDropdownOpen(!isResourcesDropdownOpen)}
+                className="text-slate-600 dark:text-slate-300 border border-slate-300 dark:border-slate-700 rounded-full p-2 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                aria-expanded={isResourcesDropdownOpen}
+                aria-haspopup="true"
+                title={translate('resourcesDropdown')}
+              >
+                <InfoIcon className="w-5 h-5" />
+              </button>
+              {isResourcesDropdownOpen && (
+                <div 
+                  className="absolute right-0 mt-2 w-48 bg-white dark:bg-slate-800 rounded-xl shadow-lg z-20 border border-slate-200 dark:border-slate-700"
+                  onMouseLeave={() => setIsResourcesDropdownOpen(false)}
+                >
+                  <button
+                    onClick={() => { setActiveFeature(Feature.ABOUT_US); setIsResourcesDropdownOpen(false); }}
+                    className="w-full text-left px-4 py-2 text-sm text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700"
+                  >
+                    {translate('footerAboutUs')}
+                  </button>
+                  <button
+                    onClick={() => { setActiveFeature(Feature.PRIVACY_POLICY); setIsResourcesDropdownOpen(false); }}
+                    className="w-full text-left px-4 py-2 text-sm text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700"
+                  >
+                    {translate('footerPrivacyPolicy')}
+                  </button>
+                   <button
+                    onClick={() => { setActiveFeature(Feature.CONTACT_US); setIsResourcesDropdownOpen(false); }}
+                    className="w-full text-left px-4 py-2 text-sm text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700"
+                  >
+                    {translate('footerContactUs')}
+                  </button>
+                </div>
+              )}
+            </div>
             <div className="relative">
               <button 
                 onClick={() => setIsLangDropdownOpen(!isLangDropdownOpen)}
@@ -202,7 +242,8 @@ const App: React.FC = () => {
                     <h4>{translate('headerTitle')}</h4>
                     <ul>
                         <li><button onClick={() => setActiveFeature(Feature.ABOUT_US)}>{translate('footerAboutUs')}</button></li>
-                        <li><button onClick={() => { /* no-op */ }}>{translate('footerPrivacyPolicy')}</button></li>
+                        <li><button onClick={() => setActiveFeature(Feature.PRIVACY_POLICY)}>{translate('footerPrivacyPolicy')}</button></li>
+                        <li><button onClick={() => setActiveFeature(Feature.CONTACT_US)}>{translate('footerContactUs')}</button></li>
                         <li className="!mt-4"><p className="text-sm text-[#bbbbbb] font-sans">{translate('footerCopyright').replace('{year}', new Date().getFullYear().toString())}</p></li>
                     </ul>
                 </div>

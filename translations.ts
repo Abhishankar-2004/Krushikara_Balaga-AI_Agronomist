@@ -9,6 +9,7 @@ export const translations = {
     footerCopyright: '© {year} Krushikara Balaga. All Rights Reserved.',
     footerAboutUs: 'About Us',
     footerPrivacyPolicy: 'Privacy Policy',
+    footerContactUs: 'Contact Us',
     footerColumnFeatures: 'Features',
     footerColumnQuickLinks: 'Quick Links',
     footerColumnFollowUs: 'Follow Us',
@@ -24,6 +25,7 @@ export const translations = {
     navCommunityConnect: 'Community',
     navProfile: 'Profile',
     navAnalytics: 'Analytics',
+    resourcesDropdown: 'Resources',
 
     // Language & Theme Switcher
     language: 'Language',
@@ -252,6 +254,20 @@ export const translations = {
     teamMember3Name: 'Priya Desai',
     teamMember3Role: 'UI/UX Designer & Community Manager',
     teamMember3Bio: 'Priya is passionate about creating intuitive, user-friendly interfaces and fostering a supportive community for our farmers.',
+
+    // Privacy Policy
+    privacyPolicyTitle: 'Privacy Policy',
+    privacyPolicyP1: 'Your privacy is important to us. This Privacy Policy explains how Krushikara Balaga collects, uses, and protects your information. All data, including your name, location, and usage analytics, is stored locally on your device and is not uploaded to our servers.',
+    privacyPolicyH2: 'Information We Collect',
+    privacyPolicyP2: 'We collect information you provide directly to us, such as your name and location when you create your profile. We also collect anonymous usage data to understand which features are most popular, helping us improve the app.',
+    privacyPolicyH3: 'How We Use Information',
+    privacyPolicyP3: 'Your information is used to personalize your experience, such as providing weather forecasts for your specified location. Usage data is used solely for analytics to improve app functionality.',
+    privacyPolicyH4: 'Data Security',
+    privacyPolicyP4: 'Since all personal data is stored on your device, you have full control over it. We do not have access to your personal profile information.',
+
+    // Contact Us
+    contactUsTitle: 'Contact Us',
+    contactUsDescription: 'Have questions, feedback, or need support? We\'d love to hear from you. Reach out to us through the channels below.',
   },
   [Language.KN]: {
     // App Header & Footer
@@ -261,6 +277,7 @@ export const translations = {
     footerCopyright: '© {year} ಕೃಷಿಕರ ಬಳಗ. ಎಲ್ಲಾ ಹಕ್ಕುಗಳನ್ನು ಕಾಯ್ದಿರಿಸಲಾಗಿದೆ.',
     footerAboutUs: 'ನಮ್ಮ ಬಗ್ಗೆ',
     footerPrivacyPolicy: 'ಗೌಪ್ಯತಾ ನೀತಿ',
+    footerContactUs: 'ನಮ್ಮನ್ನು ಸಂಪರ್ಕಿಸಿ',
     footerColumnFeatures: 'ವೈಶಿಷ್ಟ್ಯಗಳು',
     footerColumnQuickLinks: 'ತ್ವರಿತ ಲಿಂಕ್‌ಗಳು',
     footerColumnFollowUs: 'ನಮ್ಮನ್ನು ಹಿಂಬಾಲಿಸಿ',
@@ -276,6 +293,7 @@ export const translations = {
     navCommunityConnect: 'ಸಮುದಾಯ',
     navProfile: 'ಪ್ರೊಫೈಲ್',
     navAnalytics: 'ವಿಶ್ಲೇಷಣೆ',
+    resourcesDropdown: 'ಸಂಪನ್ಮೂಲಗಳು',
 
     // Language & Theme Switcher
     language: 'ಭಾಷೆ',
@@ -502,5 +520,19 @@ export const translations = {
     teamMember3Name: 'ಪ್ರಿಯಾ ದೇಸಾಯಿ',
     teamMember3Role: 'UI/UX ವಿನ್ಯಾಸಕಿ ಮತ್ತು ಸಮುದಾಯ ವ್ಯವಸ್ಥಾಪಕಿ',
     teamMember3Bio: 'ಪ್ರಿಯಾ ಅವರು ಅರ್ಥಗರ್ಭಿತ, ಬಳಕೆದಾರ ಸ್ನೇಹಿ ಇಂಟರ್ಫೇಸ್‌ಗಳನ್ನು ರಚಿಸುವುದರಲ್ಲಿ ಮತ್ತು ನಮ್ಮ ರೈತರಿಗಾಗಿ ಬೆಂಬಲಿಸುವ ಸಮುದಾಯವನ್ನು ಪೋಷಿಸುವುದರಲ್ಲಿ ಆಸಕ್ತರಾಗಿದ್ದಾರೆ.',
+    
+    // Privacy Policy
+    privacyPolicyTitle: 'ಗೌಪ್ಯತಾ ನೀತಿ',
+    privacyPolicyP1: 'ನಿಮ್ಮ ಗೌಪ್ಯತೆ ನಮಗೆ ಮುಖ್ಯವಾಗಿದೆ. ಈ ಗೌಪ್ಯತಾ ನೀತಿಯು ಕೃಷಿಕರ ಬಳಗವು ನಿಮ್ಮ ಮಾಹಿತಿಯನ್ನು ಹೇಗೆ ಸಂಗ್ರಹಿಸುತ್ತದೆ, ಬಳಸುತ್ತದೆ ಮತ್ತು ರಕ್ಷಿಸುತ್ತದೆ ಎಂಬುದನ್ನು ವಿವರಿಸುತ್ತದೆ. ನಿಮ್ಮ ಹೆಸರು, ಸ್ಥಳ ಮತ್ತು ಬಳಕೆಯ ವಿಶ್ಲೇಷಣೆ ಸೇರಿದಂತೆ ಎಲ್ಲಾ ಡೇಟಾವನ್ನು ನಿಮ್ಮ ಸಾಧನದಲ್ಲಿ ಸ್ಥಳೀಯವಾಗಿ ಸಂಗ್ರಹಿಸಲಾಗುತ್ತದೆ ಮತ್ತು ನಮ್ಮ ಸರ್ವರ್‌ಗಳಿಗೆ ಅಪ್‌ಲೋಡ್ ಮಾಡಲಾಗುವುದಿಲ್ಲ.',
+    privacyPolicyH2: 'ನಾವು ಸಂಗ್ರಹಿಸುವ ಮಾಹಿತಿ',
+    privacyPolicyP2: 'ನೀವು ನಮಗೆ ನೇರವಾಗಿ ಒದಗಿಸುವ ಮಾಹಿತಿಯನ್ನು ನಾವು ಸಂಗ್ರಹಿಸುತ್ತೇವೆ, ಉದಾಹರಣೆಗೆ ನಿಮ್ಮ ಪ್ರೊಫೈಲ್ ರಚಿಸುವಾಗ ನಿಮ್ಮ ಹೆಸರು ಮತ್ತು ಸ್ಥಳ. ಅಪ್ಲಿಕೇಶನ್ ಅನ್ನು ಸುಧಾರಿಸಲು ನಮಗೆ ಸಹಾಯ ಮಾಡಲು, ಯಾವ ವೈಶಿಷ್ಟ್ಯಗಳು ಹೆಚ್ಚು ಜನಪ್ರಿಯವಾಗಿವೆ ಎಂಬುದನ್ನು ಅರ್ಥಮಾಡಿಕೊಳ್ಳಲು ನಾವು ಅನಾಮಧೇಯ ಬಳಕೆಯ ಡೇಟಾವನ್ನು ಸಹ ಸಂಗ್ರಹಿಸುತ್ತೇವೆ.',
+    privacyPolicyH3: 'ನಾವು ಮಾಹಿತಿಯನ್ನು ಹೇಗೆ ಬಳಸುತ್ತೇವೆ',
+    privacyPolicyP3: 'ನಿಮ್ಮ ಅನುಭವವನ್ನು ವೈಯಕ್ತೀಕರಿಸಲು ನಿಮ್ಮ ಮಾಹಿತಿಯನ್ನು ಬಳಸಲಾಗುತ್ತದೆ, ಉದಾಹರಣೆಗೆ ನಿಮ್ಮ ನಿರ್ದಿಷ್ಟ ಸ್ಥಳಕ್ಕಾಗಿ ಹವಾಮಾನ ಮುನ್ಸೂಚನೆಗಳನ್ನು ಒದಗಿಸುವುದು. ಬಳಕೆಯ ಡೇಟಾವನ್ನು ಅಪ್ಲಿಕೇಶನ್ ಕಾರ್ಯವನ್ನು ಸುಧಾರಿಸಲು ವಿಶ್ಲೇಷಣೆಗಾಗಿ ಮಾತ್ರ ಬಳಸಲಾಗುತ್ತದೆ.',
+    privacyPolicyH4: 'ಡೇಟಾ ಭದ್ರತೆ',
+    privacyPolicyP4: 'ಎಲ್ಲಾ ವೈಯಕ್ತಿಕ ಡೇಟಾವನ್ನು ನಿಮ್ಮ ಸಾಧನದಲ್ಲಿ ಸಂಗ್ರಹಿಸಲಾಗಿರುವುದರಿಂದ, ಅದರ ಮೇಲೆ ನಿಮಗೆ ಸಂಪೂರ್ಣ ನಿಯಂತ್ರಣವಿದೆ. ನಿಮ್ಮ ವೈಯಕ್ತಿಕ ಪ್ರೊಫೈಲ್ ಮಾಹಿತಿಗೆ ನಮಗೆ ಪ್ರವೇಶವಿಲ್ಲ.',
+    
+    // Contact Us
+    contactUsTitle: 'ನಮ್ಮನ್ನು ಸಂಪರ್ಕಿಸಿ',
+    contactUsDescription: 'ಪ್ರಶ್ನೆಗಳು, ಪ್ರತಿಕ್ರಿಯೆ ಇದೆಯೇ, ಅಥವಾ ಬೆಂಬಲ ಬೇಕೇ? ನಿಮ್ಮಿಂದ ಕೇಳಲು ನಾವು ಇಷ್ಟಪಡುತ್ತೇವೆ. ಕೆಳಗಿನ ಚಾನಲ್‌ಗಳ ಮೂಲಕ ನಮ್ಮನ್ನು ಸಂಪರ್ಕಿಸಿ.',
   },
 };
