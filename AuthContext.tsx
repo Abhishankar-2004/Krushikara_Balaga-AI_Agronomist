@@ -7,7 +7,7 @@ export interface AuthUser extends UserProfile {
 }
 
 interface StoredUser extends AuthUser {
-    password_sim: string; // Not a hash, just for simulation
+    password_sim: string; // This will now be a base64 encoded string
 }
 
 interface AuthContextType {
@@ -31,7 +31,10 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     if (users.some(u => u.email.toLowerCase() === email.toLowerCase())) {
       return false; // User already exists
     }
-    const newUser: StoredUser = { name, email, password_sim, location: '' };
+    // "Hash" the password using base64 for simulation.
+    // In a real app, use a proper hashing algorithm like bcrypt.
+    const hashedPassword = btoa(password_sim);
+    const newUser: StoredUser = { name, email, password_sim: hashedPassword, location: '' };
     users.push(newUser);
     storageService.setItem(USERS_STORAGE_KEY, users);
     
@@ -44,14 +47,38 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 
   const login = (email: string, password_sim: string): boolean => {
     const users = storageService.getItem<StoredUser[]>(USERS_STORAGE_KEY) || [];
-    const foundUser = users.find(u => u.email.toLowerCase() === email.toLowerCase() && u.password_sim === password_sim);
-    
-    if (foundUser) {
+    const lowerEmail = email.toLowerCase();
+    const foundUser = users.find(u => u.email.toLowerCase() === lowerEmail);
+
+    if (!foundUser) {
+        return false;
+    }
+
+    const hashedPassword = btoa(password_sim);
+    let passwordMatch = false;
+
+    // Check for new "hashed" password first
+    if (foundUser.password_sim === hashedPassword) {
+        passwordMatch = true;
+    } 
+    // Backward compatibility: check for old plaintext password
+    else if (foundUser.password_sim === password_sim) {
+        passwordMatch = true;
+        // Upgrade the password to the new "hashed" format upon successful login
+        const userIndex = users.findIndex(u => u.email.toLowerCase() === lowerEmail);
+        if (userIndex !== -1) {
+            users[userIndex].password_sim = hashedPassword;
+            storageService.setItem(USERS_STORAGE_KEY, users);
+        }
+    }
+
+    if (passwordMatch) {
       const { password_sim: _, ...userToSet } = foundUser;
       setUser(userToSet);
       storageService.setItem(SESSION_STORAGE_KEY, userToSet);
       return true;
     }
+    
     return false;
   };
 
