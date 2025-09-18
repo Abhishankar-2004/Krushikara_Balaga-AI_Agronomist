@@ -18,8 +18,8 @@ const ContactUs: React.FC = () => {
                     </div>
                     <div>
                         <h3 className="text-lg font-semibold text-slate-700 dark:text-slate-200">Email</h3>
-                        <a href="mailto:support@krushikara-balaga.dev" className="text-secondary hover:underline">
-                            support@krushikara-balaga.dev
+                        <a href="mailto:abhishankareddy1@gmail.com" className="text-secondary hover:underline">
+                            abhishankareddy1@gmail.com
                         </a>
                     </div>
                 </div>
@@ -29,8 +29,8 @@ const ContactUs: React.FC = () => {
                     </div>
                     <div>
                         <h3 className="text-lg font-semibold text-slate-700 dark:text-slate-200">Phone</h3>
-                        <a href="tel:+919876543210" className="text-secondary hover:underline">
-                            +91 98765 43210
+                        <a href="tel:+918431522566" className="text-secondary hover:underline">
+                            +91 84315 22566
                         </a>
                     </div>
                 </div>

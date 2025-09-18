@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Feature, Language, UserProfile } from './types';
 import Dashboard from './components/Dashboard';
@@ -271,10 +272,9 @@ const App: React.FC = () => {
                 <div className="footer-col">
                     <h4>{translate('footerColumnFollowUs')}</h4>
                     <div className="social-links">
-                        <a href="#" aria-label="Facebook"><i className="fab fa-facebook-f"></i></a>
-                        <a href="#" aria-label="Twitter"><i className="fab fa-twitter"></i></a>
-                        <a href="#" aria-label="Instagram"><i className="fab fa-instagram"></i></a>
-                        <a href="#" aria-label="LinkedIn"><i className="fab fa-linkedin-in"></i></a>
+                        <a href="https://github.com/Abhishankar-2004" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i className="fab fa-github"></i></a>
+                        <a href="https://www.instagram.com/abhi_shankareddy/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i className="fab fa-instagram"></i></a>
+                        <a href="https://www.linkedin.com/in/abhi-s-3a4197310/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i className="fab fa-linkedin-in"></i></a>
                     </div>
                 </div>
             </div>

@@ -10,22 +10,10 @@ const AboutUs: React.FC = () => {
 
     const teamMembers = [
         {
-            name: translate('teamMember1Name'),
-            role: translate('teamMember1Role'),
-            bio: translate('teamMember1Bio'),
-            imageUrl: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=1888&auto=format&fit=crop'
-        },
-        {
             name: translate('teamMember2Name'),
             role: translate('teamMember2Role'),
             bio: translate('teamMember2Bio'),
-            imageUrl: 'https://drive.google.com/uc?export=view&id=1IFV83Ml1QTNlkDGMS_lBolNxhWUM1FKy'
-        },
-        {
-            name: translate('teamMember3Name'),
-            role: translate('teamMember3Role'),
-            bio: translate('teamMember3Bio'),
-            imageUrl: 'https://images.unsplash.com/photo-1544717297-fa95b6ee9643?q=80&w=1887&auto=format&fit=crop'
+            imageUrl: 'https://i.im.ge/2025/09/18/nifMih.profile-pic-formal.jpeg'
         },
     ];
 
@@ -64,9 +52,9 @@ const AboutUs: React.FC = () => {
                 <h3 className="text-3xl font-bold text-primary mb-2">{translate('meetOurTeamTitle')}</h3>
                 <p className="text-slate-500 dark:text-slate-400 max-w-2xl mx-auto text-lg">{translate('meetOurTeamDescription')}</p>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+            <div className="flex justify-center">
                 {teamMembers.map((member, index) => (
-                    <div key={index} className="bg-white dark:bg-slate-800/50 p-6 rounded-2xl shadow-lg dark:shadow-none dark:border dark:border-slate-800 text-center card-enter transform transition-transform hover:-translate-y-2" style={{ animationDelay: `${index * 100}ms` }}>
+                    <div key={index} className="bg-white dark:bg-slate-800/50 p-6 rounded-2xl shadow-lg dark:shadow-none dark:border dark:border-slate-800 text-center card-enter transform transition-transform hover:-translate-y-2 max-w-sm" style={{ animationDelay: `${index * 100}ms` }}>
                         <img src={member.imageUrl} alt={member.name} className="w-32 h-32 rounded-full mx-auto mb-4 object-cover border-4 border-slate-200 dark:border-slate-700" />
                         <h4 className="text-xl font-bold text-slate-900 dark:text-white">{member.name}</h4>
                         <p className="text-primary font-semibold mb-3">{member.role}</p>
