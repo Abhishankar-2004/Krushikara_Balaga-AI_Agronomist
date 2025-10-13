@@ -13,7 +13,7 @@ import { LightbulbIcon } from './icons/LightbulbIcon';
 import { useLanguage } from '../LanguageContext';
 import { Language, Feature } from '../types';
 import { analyticsService } from '../services/analyticsService';
-import { useAuth } from '../AuthContext';
+import { useUser } from '@clerk/clerk-react';
 import {
   LineChart,
   Line,
@@ -94,7 +94,7 @@ const MarketTrendsSection: React.FC = () => {
                 } else {
                     setTrends(result);
                 }
-            } catch (err) {
+            } catch {
                 setError(translate('aiParsingError'));
             } finally {
                 setIsLoading(false);
@@ -130,7 +130,7 @@ const MarketTrendsSection: React.FC = () => {
 
 const MarketGuru: React.FC = () => {
   const { language, translate } = useLanguage();
-  const { user } = useAuth();
+  const { user } = useUser();
   const [query, setQuery] = useState<string>('');
   const [analysis, setAnalysis] = useState<MarketAnalysisResult | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -138,7 +138,7 @@ const MarketGuru: React.FC = () => {
   const [error, setError] = useState<string>('');
 
   const handleAnalyze = useCallback(async () => {
-    if (!query.trim() || !user?.email) {
+    if (!query.trim() || !user?.emailAddresses[0]?.emailAddress) {
       setError(translate('marketQueryError'));
       return;
     }
@@ -152,9 +152,9 @@ const MarketGuru: React.FC = () => {
         setError(result.error);
       } else {
         setAnalysis(result);
-        analyticsService.logFeatureUse(Feature.MARKET_GURU, user.email);
+        analyticsService.logFeatureUse(Feature.MARKET_GURU, user.emailAddresses[0]?.emailAddress || '');
       }
-    } catch (err) {
+    } catch {
       setError(translate('aiParsingError'));
     } finally {
       setIsLoading(false);

@@ -11,7 +11,7 @@ import { LeafIcon } from './icons/LeafIcon';
 import { BeakerIcon } from './icons/BeakerIcon';
 import { useLanguage } from '../LanguageContext';
 import { analyticsService } from '../services/analyticsService';
-import { useAuth } from '../AuthContext';
+import { useUser } from '@clerk/clerk-react';
 import { Feature } from '../types';
 import { getCommonDiseases, DiseaseInfo } from '../services/diseaseService';
 
@@ -90,7 +90,7 @@ const CommonDiseasesSection: React.FC = () => {
 
 const CropDoctor: React.FC = () => {
   const { language, translate } = useLanguage();
-  const { user } = useAuth();
+  const { user } = useUser();
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [analysis, setAnalysis] = useState<AnalysisResult | null>(null);
@@ -108,7 +108,7 @@ const CropDoctor: React.FC = () => {
   };
 
   const handleAnalyze = useCallback(async () => {
-    if (!imageFile || !user?.email) {
+    if (!imageFile || !user?.emailAddresses[0]?.emailAddress) {
       setError(translate('uploadError'));
       return;
     }
@@ -122,7 +122,7 @@ const CropDoctor: React.FC = () => {
         setError(result.error);
       } else {
         setAnalysis(result);
-        analyticsService.logFeatureUse(Feature.CROP_DOCTOR, user.email);
+        analyticsService.logFeatureUse(Feature.CROP_DOCTOR, user.emailAddresses[0]?.emailAddress || '');
       }
     } catch (err) {
       setError(translate('aiParsingError'));

@@ -10,9 +10,9 @@ import { MicIcon } from './icons/MicIcon';
 import { LightbulbIcon } from './icons/LightbulbIcon';
 import { Language, Feature } from '../types';
 import { WeatherConditionIcon } from './icons/WeatherConditionIcon';
-import { storageService } from '../services/storageService';
+// Removed storageService - now using Clerk for user data
 import { analyticsService } from '../services/analyticsService';
-import { useAuth } from '../AuthContext';
+import { useUser } from '@clerk/clerk-react';
 import { ComposedChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend, ReferenceLine } from 'recharts';
 
 interface WeatherAdvisorProps {
@@ -57,7 +57,7 @@ const CustomTooltipContent: React.FC<any> = ({ active, payload, label }) => {
 
 const WeatherAdvisor: React.FC<WeatherAdvisorProps> = ({ defaultLocation }) => {
   const { language, translate } = useLanguage();
-  const { user } = useAuth();
+  const { user } = useUser();
   const [location, setLocation] = useState<string>('');
   const [advisory, setAdvisory] = useState<WeatherAdvisory | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -71,7 +71,7 @@ const WeatherAdvisor: React.FC<WeatherAdvisorProps> = ({ defaultLocation }) => {
   }, [defaultLocation]);
 
   const handleSearch = useCallback(async () => {
-    if (!location.trim() || !user?.email) {
+    if (!location.trim() || !user?.emailAddresses[0]?.emailAddress) {
       setError(translate('weatherQueryError'));
       return;
     }
@@ -83,15 +83,15 @@ const WeatherAdvisor: React.FC<WeatherAdvisorProps> = ({ defaultLocation }) => {
       const result: WeatherAdvisory = JSON.parse(resultJson);
       if (result.error) {
         setError(result.error);
-        storageService.removeItem('lastWeather');
+        localStorage.removeItem('lastWeather');
       } else {
         setAdvisory(result);
-        storageService.setItem('lastWeather', result);
-        analyticsService.logFeatureUse(Feature.WEATHER_ADVISOR, user.email);
+        localStorage.setItem('lastWeather', JSON.stringify(result));
+        analyticsService.logFeatureUse(Feature.WEATHER_ADVISOR, user.emailAddresses[0]?.emailAddress || '');
       }
     } catch (err) {
       setError(translate('weatherFetchError'));
-      storageService.removeItem('lastWeather');
+      localStorage.removeItem('lastWeather');
       console.error(err);
     } finally {
       setIsLoading(false);

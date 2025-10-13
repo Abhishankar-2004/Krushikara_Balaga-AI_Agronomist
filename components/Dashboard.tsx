@@ -5,7 +5,7 @@
 import React, { useEffect, useState } from 'react';
 import { useLanguage } from '../LanguageContext';
 import { Feature, UserProfile, TranslationKey } from '../types';
-import { storageService } from '../services/storageService';
+// Removed storageService - now using Clerk for user data
 import { WeatherAdvisory, getMarketTrends, MarketTrends, getWeatherAdvisory } from '../services/geminiService';
 import { WeatherConditionIcon } from './icons/WeatherConditionIcon';
 import { LeafIcon } from './icons/LeafIcon';
@@ -22,7 +22,9 @@ import { getTrendingSchemes, TrendingScheme } from '../services/schemeService';
 import { TrendingUpIcon } from './icons/TrendingUpIcon';
 import { TrendingDownIcon } from './icons/TrendingDownIcon';
 import Spinner from './common/Spinner';
-import { useAuth } from '../AuthContext';
+import { useUser } from '@clerk/clerk-react';
+import ProfileCompletion from './ProfileCompletion';
+import MigrationNotification from './MigrationNotification';
 
 interface DashboardProps {
   setActiveFeature: (feature: Feature) => void;
@@ -82,7 +84,14 @@ const featureList = [
 
 const WeatherWidget: React.FC<{ location: string, onClick: () => void }> = ({ location, onClick }) => {
     const { language, translate } = useLanguage();
-    const [weather, setWeather] = useState<WeatherAdvisory | null>(storageService.getItem<WeatherAdvisory>('lastWeather'));
+    const [weather, setWeather] = useState<WeatherAdvisory | null>(() => {
+        try {
+            const stored = localStorage.getItem('lastWeather');
+            return stored ? JSON.parse(stored) : null;
+        } catch {
+            return null;
+        }
+    });
     const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
@@ -94,7 +103,7 @@ const WeatherWidget: React.FC<{ location: string, onClick: () => void }> = ({ lo
                     const result: WeatherAdvisory = JSON.parse(resultJson);
                     if (!result.error) {
                         setWeather(result);
-                        storageService.setItem('lastWeather', result);
+                        localStorage.setItem('lastWeather', JSON.stringify(result));
                     }
                 } catch (e) {
                     console.error("Failed to fetch weather for widget", e);
@@ -105,7 +114,14 @@ const WeatherWidget: React.FC<{ location: string, onClick: () => void }> = ({ lo
             }
         };
 
-        const lastWeather = storageService.getItem<WeatherAdvisory>('lastWeather');
+        const lastWeather = (() => {
+            try {
+                const stored = localStorage.getItem('lastWeather');
+                return stored ? JSON.parse(stored) : null;
+            } catch {
+                return null;
+            }
+        })();
         if (!lastWeather || lastWeather.location !== location) {
              fetchWeather();
         } else {
@@ -179,10 +195,43 @@ const CustomTooltip = ({ active, payload, label }: any) => {
   return null;
 };
 
+const PieTooltip = ({ active, payload }: any) => {
+  if (active && payload && payload.length) {
+    const data = payload[0];
+    const percentage = ((data.value / data.payload.total) * 100).toFixed(1);
+    return (
+      <div className="bg-slate-800/90 backdrop-blur-sm text-white p-3 rounded-lg border border-slate-700 shadow-lg">
+        <p className="font-bold text-sm mb-1">{data.name}</p>
+        <p className="text-xs text-slate-300">Usage: {data.value}</p>
+        <p className="text-xs text-slate-300">Percentage: {percentage}%</p>
+      </div>
+    );
+  }
+  return null;
+};
+
+const BarTooltip = ({ active, payload, label }: any) => {
+  if (active && payload && payload.length) {
+    const data = payload[0];
+    const percentage = ((data.value / data.payload.total) * 100).toFixed(1);
+    return (
+      <div className="bg-slate-800/90 backdrop-blur-sm text-white p-3 rounded-lg border border-slate-700 shadow-lg">
+        <p className="font-bold text-sm mb-1">{label}</p>
+        <p className="text-xs text-slate-300">Usage Count: {data.value}</p>
+        <p className="text-xs text-slate-300">Percentage: {percentage}%</p>
+        <div className="mt-1 pt-1 border-t border-slate-600">
+          <p className="text-xs text-slate-400">Feature Analytics</p>
+        </div>
+      </div>
+    );
+  }
+  return null;
+};
+
 
 const Dashboard: React.FC<DashboardProps> = ({ setActiveFeature, userProfile }) => {
     const { language, translate } = useLanguage();
-    const { user } = useAuth();
+    const { user } = useUser();
     
     const [marketTrends, setMarketTrends] = useState<MarketTrends | null>(null);
     const [trendingScheme, setTrendingScheme] = useState<TrendingScheme | null>(null);
@@ -191,9 +240,10 @@ const Dashboard: React.FC<DashboardProps> = ({ setActiveFeature, userProfile }) 
     const [pieData, setPieData] = useState<ChartData[]>([]);
     const [totalUsage, setTotalUsage] = useState(0);
 
+    // Separate effect for analytics data
     useEffect(() => {
-        if (user?.email) {
-            const rawData = analyticsService.getFeatureUsageData(user.email);
+        if (user?.emailAddresses[0]?.emailAddress) {
+            const rawData = analyticsService.getFeatureUsageData(user.emailAddresses[0].emailAddress);
             const formattedData: ChartData[] = Object.keys(rawData)
                 .map(key => {
                     const translationKey = featureToTranslationKey(key);
@@ -202,11 +252,19 @@ const Dashboard: React.FC<DashboardProps> = ({ setActiveFeature, userProfile }) 
                 .filter((item): item is ChartData => item !== null)
                 .sort((a, b) => b.count - a.count);
 
-            setBarData(formattedData);
-            setPieData(formattedData.filter(d => d.count > 0));
-            setTotalUsage(formattedData.reduce((acc, item) => acc + item.count, 0));
+            const total = formattedData.reduce((acc, item) => acc + item.count, 0);
+            const barDataWithTotal = formattedData.map(item => ({ ...item, total }));
+            setBarData(barDataWithTotal);
+            
+            const filteredPieData = formattedData.filter(d => d.count > 0);
+            const pieDataWithTotal = filteredPieData.map(item => ({ ...item, total }));
+            setPieData(pieDataWithTotal);
+            setTotalUsage(total);
         }
+    }, [user, translate]);
 
+    // Separate effect for dashboard data
+    useEffect(() => {
         const fetchDashboardData = async () => {
             try {
                 const trendsJson = await getMarketTrends(language);
@@ -221,8 +279,7 @@ const Dashboard: React.FC<DashboardProps> = ({ setActiveFeature, userProfile }) 
             }
         };
         fetchDashboardData();
-
-    }, [user, translate, language]);
+    }, [language]);
 
     const welcomeMessage = userProfile?.name
       ? translate('dashboardWelcomeUser').replace('{name}', userProfile.name)
@@ -232,6 +289,16 @@ const Dashboard: React.FC<DashboardProps> = ({ setActiveFeature, userProfile }) 
         <div>
             <div className="mb-8 md:mb-12">
                 <h1 className="text-3xl md:text-5xl font-extrabold text-slate-900 dark:text-slate-50">{welcomeMessage}</h1>
+            </div>
+            
+            {/* Migration Notification */}
+            <div className="mb-6">
+                <MigrationNotification />
+            </div>
+            
+            {/* Profile Completion Widget */}
+            <div className="mb-6">
+                <ProfileCompletion onNavigateToProfile={() => setActiveFeature(Feature.PROFILE)} />
             </div>
             
             <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-lg dark:shadow-none dark:border dark:border-slate-800 p-6 sm:p-8 md:p-10 w-full mx-auto mb-8 card-enter">
@@ -347,7 +414,7 @@ const Dashboard: React.FC<DashboardProps> = ({ setActiveFeature, userProfile }) 
                                     <CartesianGrid strokeDasharray="3 3" stroke="rgba(128,163,184,0.1)" />
                                     <XAxis dataKey="name" interval={0} tick={{ fontSize: 12 }} hide />
                                     <YAxis allowDecimals={false} tick={{fill: '#64748b'}} />
-                                    <Tooltip content={<CustomTooltip />} cursor={{ fill: 'rgba(148, 163, 184, 0.1)'}}/>
+                                    <Tooltip content={<BarTooltip />} cursor={{ fill: 'rgba(148, 163, 184, 0.1)'}}/>
                                     <Legend wrapperStyle={{ fontSize: '14px', paddingTop: '20px' }}/>
                                     <Bar dataKey="count" name={translate('featureUsageTitle')} fill="#16a34a" barSize={30} radius={[4, 4, 0, 0]} />
                                 </BarChart>
@@ -365,20 +432,29 @@ const Dashboard: React.FC<DashboardProps> = ({ setActiveFeature, userProfile }) 
                                         <Pie
                                             data={pieData}
                                             cx="50%"
-                                            cy="50%"
+                                            cy="45%"
                                             labelLine={false}
-                                            outerRadius={80}
+                                            outerRadius={70}
                                             fill="#8884d8"
                                             dataKey="count"
                                             nameKey="name"
-                                            label={({ name, percent }) => `${(percent * 100).toFixed(0)}%`}
-                                            
+                                            label={({ percent }) => `${(percent * 100).toFixed(0)}%`}
                                         >
                                             {pieData.map((entry, index) => (
                                                 <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                                             ))}
                                         </Pie>
-                                        <Tooltip content={<CustomTooltip />} />
+                                        <Tooltip content={<PieTooltip />} />
+                                        <Legend 
+                                            verticalAlign="bottom" 
+                                            height={36}
+                                            wrapperStyle={{ 
+                                                fontSize: '12px', 
+                                                paddingTop: '10px',
+                                                textAlign: 'center'
+                                            }}
+                                            iconType="circle"
+                                        />
                                     </PieChart>
                                 </ResponsiveContainer>
                             </Card>
