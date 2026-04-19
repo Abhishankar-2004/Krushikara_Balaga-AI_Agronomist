@@ -9,7 +9,7 @@ import Button from './common/Button';
 import Spinner from './common/Spinner';
 import { MicIcon } from './icons/MicIcon';
 import { analyticsService } from '../services/analyticsService';
-import { useUser } from '@clerk/clerk-react';
+import { useAuth } from '../AuthContext';
 import { LoanIcon } from './icons/LoanIcon';
 
 const LoanInfoCard: React.FC<{ name: string, purpose: string, description: string }> = ({ name, purpose, description }) => (
@@ -48,7 +48,7 @@ const CommonLoansInfo: React.FC = () => {
 
 const LoanAdvisor: React.FC = () => {
     const { language, translate } = useLanguage();
-    const { user } = useUser();
+    const { user } = useAuth();
     const [amount, setAmount] = useState('');
     const [purpose, setPurpose] = useState('');
     const [results, setResults] = useState<LoanInfo[]>([]);
@@ -58,7 +58,7 @@ const LoanAdvisor: React.FC = () => {
     const [searched, setSearched] = useState(false);
 
     const handleSearch = useCallback(async () => {
-        if (!amount.trim() || !purpose.trim() || !user?.emailAddresses[0]?.emailAddress) {
+        if (!amount.trim() || !purpose.trim() || !user?.email) {
             setError(translate('loanQueryError'));
             return;
         }
@@ -80,7 +80,7 @@ const LoanAdvisor: React.FC = () => {
             }
             else {
                 setResults(loans as LoanInfo[]);
-                analyticsService.logFeatureUse(Feature.LOAN_ADVISOR, user.emailAddresses[0]?.emailAddress || '');
+                analyticsService.logFeatureUse(Feature.LOAN_ADVISOR, user.email);
             }
         } catch (err) {
             setError(translate('loanFetchError'));

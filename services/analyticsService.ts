@@ -1,5 +1,5 @@
 
-// Removed storageService - analytics now handled differently with Clerk
+import { storageService } from './storageService';
 import { Feature } from '../types';
 
 export type AnalyticsData = { [key in Feature]?: number };
@@ -10,16 +10,14 @@ export const analyticsService = {
     logFeatureUse: (feature: Feature, userEmail: string): void => {
         if (!userEmail) return;
         const key = getStorageKey(userEmail);
-        const stored = localStorage.getItem(key);
-        const data = stored ? JSON.parse(stored) : {};
+        const data = storageService.getItem<AnalyticsData>(key) || {};
         data[feature] = (data[feature] || 0) + 1;
-        localStorage.setItem(key, JSON.stringify(data));
+        storageService.setItem(key, data);
     },
 
     getFeatureUsageData: (userEmail: string): AnalyticsData => {
         if (!userEmail) return {};
         const key = getStorageKey(userEmail);
-        const stored = localStorage.getItem(key);
-        return stored ? JSON.parse(stored) : {};
+        return storageService.getItem<AnalyticsData>(key) || {};
     }
 };

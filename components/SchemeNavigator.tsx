@@ -9,7 +9,7 @@ import { LinkIcon } from './icons/LinkIcon';
 import { useLanguage } from '../LanguageContext';
 import { Language, Feature } from '../types';
 import { analyticsService } from '../services/analyticsService';
-import { useUser } from '@clerk/clerk-react';
+import { useAuth } from '../AuthContext';
 import { getTrendingSchemes, TrendingScheme } from '../services/schemeService';
 import { CheckIcon } from './icons/CheckIcon';
 
@@ -59,7 +59,7 @@ const TrendingSchemesSection: React.FC<{ onSchemeClick: (name: string) => void }
 
 const SchemeNavigator: React.FC = () => {
   const { language, translate } = useLanguage();
-  const { user } = useUser();
+  const { user } = useAuth();
   const [query, setQuery] = useState<string>('');
   const [info, setInfo] = useState<SchemeInfoWithSources | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -67,7 +67,7 @@ const SchemeNavigator: React.FC = () => {
   const [error, setError] = useState<string>('');
 
   const handleSearch = useCallback(async () => {
-    if (!query.trim() || !user?.emailAddresses[0]?.emailAddress) {
+    if (!query.trim() || !user?.email) {
       setError(translate('schemeQueryError'));
       return;
     }
@@ -84,7 +84,7 @@ const SchemeNavigator: React.FC = () => {
         setInfo(null);
       } else {
         setInfo(result);
-        analyticsService.logFeatureUse(Feature.SCHEME_NAVIGATOR, user.emailAddresses[0]?.emailAddress || '');
+        analyticsService.logFeatureUse(Feature.SCHEME_NAVIGATOR, user.email);
       }
     } catch (err) {
       setError(translate('schemeFetchError'));

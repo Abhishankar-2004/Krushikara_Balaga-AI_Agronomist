@@ -1,7 +1,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import { useUser } from '@clerk/clerk-react';
+import { useAuth } from '../AuthContext';
 import { useLanguage } from '../LanguageContext';
 import { analyticsService } from '../services/analyticsService';
 import { Feature, TranslationKey } from '../types';
@@ -40,15 +40,15 @@ const CustomTooltip = ({ active, payload, label }: any) => {
 };
 
 const Analytics: React.FC = () => {
-    const { user } = useUser();
+    const { user } = useAuth();
     const { translate } = useLanguage();
     const [barData, setBarData] = useState<ChartData[]>([]);
     const [pieData, setPieData] = useState<ChartData[]>([]);
     const [totalUsage, setTotalUsage] = useState(0);
 
     useEffect(() => {
-        if (user?.emailAddresses[0]?.emailAddress) {
-            const rawData = analyticsService.getFeatureUsageData(user.emailAddresses[0].emailAddress);
+        if (user?.email) {
+            const rawData = analyticsService.getFeatureUsageData(user.email);
             const formattedData: ChartData[] = Object.keys(rawData)
                 .map(key => {
                     const translationKey = featureToTranslationKey(key);

@@ -1,3 +1,4 @@
+
 import { Language } from './types';
 
 export const translations = {
@@ -63,39 +64,6 @@ export const translations = {
     landingSubtitle: 'Make smarter decisions for your farm with real-time crop diagnosis, market analysis, weather advisories, and more. Your digital companion for a prosperous harvest.',
     getStartedButton: 'Get Started',
 
-    // Clerk Authentication Translations
-    clerkSignInTitle: 'Sign in to your account',
-    clerkSignUpTitle: 'Create your account',
-    clerkEmailLabel: 'Email address',
-    clerkPasswordLabel: 'Password',
-    clerkFirstNameLabel: 'First name',
-    clerkLastNameLabel: 'Last name',
-    clerkSignInButton: 'Sign in',
-    clerkSignUpButton: 'Sign up',
-    clerkForgotPassword: 'Forgot password?',
-    clerkRememberMe: 'Remember me',
-    clerkOrContinueWith: 'Or continue with',
-    clerkAlreadyHaveAccount: 'Already have an account?',
-    clerkDontHaveAccount: "Don't have an account?",
-    clerkSignInLink: 'Sign in',
-    clerkSignUpLink: 'Sign up',
-    clerkVerifyEmail: 'Verify your email',
-    clerkVerifyEmailDescription: 'We sent a verification code to your email address',
-    clerkEnterCode: 'Enter verification code',
-    clerkResendCode: 'Resend code',
-    clerkContinue: 'Continue',
-    clerkGoBack: 'Go back',
-    clerkInvalidEmail: 'Please enter a valid email address',
-    clerkPasswordTooShort: 'Password must be at least 8 characters',
-    clerkPasswordRequired: 'Password is required',
-    clerkEmailRequired: 'Email is required',
-    clerkFirstNameRequired: 'First name is required',
-    clerkLastNameRequired: 'Last name is required',
-    clerkSignInError: 'Invalid email or password',
-    clerkSignUpError: 'Unable to create account. Please try again.',
-    clerkNetworkError: 'Network error. Please check your connection.',
-    clerkGenericError: 'Something went wrong. Please try again.',
-
     // Dashboard
     dashboardTitle: 'Krushikara Balaga',
     dashboardWelcome: 'Welcome, Farmer!',
@@ -117,7 +85,6 @@ export const translations = {
     dashboardDiagnose: 'Diagnose Now',
     marketTopRiser: 'Top Riser',
     marketTopFaller: 'Top Faller',
-
 
     // Profile Page
     profileTitle: 'Your Profile',
@@ -156,7 +123,6 @@ export const translations = {
     topRisers: 'Top Price Risers',
     topFallers: 'Top Price Fallers',
     percentageChange: 'Change (%)',
-
 
     // Scheme Navigator
     schemeNavigatorTitle: 'Government Scheme Navigator',
@@ -301,6 +267,20 @@ export const translations = {
     // Contact Us
     contactUsTitle: 'Contact Us',
     contactUsDescription: 'Have questions, feedback, or need support? We\'d love to hear from you. Reach out to us through the channels below.',
+
+    // Onboarding Tour
+    tourNext: 'Next',
+    tourBack: 'Back',
+    tourFinish: 'Finish',
+    tourSkip: 'Skip',
+    tourWelcomeTitle: 'Welcome to Krushikara Balaga!',
+    tourWelcomeText: 'Let us take you on a quick tour to show you how this app can help your farm thrive.',
+    tourNavTitle: 'Explore Features',
+    tourNavText: 'Use this menu to quickly access tools like Crop Doctor, Market Guru, and more.',
+    tourSettingsTitle: 'Personalize Your Experience',
+    tourSettingsText: 'Switch between English and Kannada, toggle Dark Mode, or update your Profile here.',
+    tourDashboardTitle: 'Your Smart Dashboard',
+    tourDashboardText: 'Get an overview of your activity, local weather, and quick access to all AI tools.',
   },
   [Language.KN]: {
     // App Header & Footer
@@ -363,39 +343,6 @@ export const translations = {
     landingTitle: 'AI-ಚಾಲಿತ ಒಳನೋಟಗಳೊಂದಿಗೆ ರೈತರ ಸಬಲೀಕರಣ',
     landingSubtitle: 'ನೈಜ-ಸಮಯದ ಬೆಳೆ ರೋಗನಿರ್ಣಯ, ಮಾರುಕಟ್ಟೆ ವಿಶ್ಲೇಷಣೆ, ಹವಾಮಾನ ಸಲಹೆಗಳು ಮತ್ತು ಹೆಚ್ಚಿನವುಗಳೊಂದಿಗೆ ನಿಮ್ಮ ಜಮೀನಿಗೆ ಉತ್ತಮ ನಿರ್ಧಾರಗಳನ್ನು ತೆಗೆದುಕೊಳ್ಳಿ. ಸಮೃದ್ಧ ಸುಗ್ಗಿಗಾಗಿ ನಿಮ್ಮ ಡಿಜಿಟಲ್ ಸಂಗಾತಿ.',
     getStartedButton: 'ಪ್ರಾರಂಭಿಸಿ',
-
-    // Clerk Authentication Translations
-    clerkSignInTitle: 'ನಿಮ್ಮ ಖಾತೆಗೆ ಸೈನ್ ಇನ್ ಮಾಡಿ',
-    clerkSignUpTitle: 'ನಿಮ್ಮ ಖಾತೆಯನ್ನು ರಚಿಸಿ',
-    clerkEmailLabel: 'ಇಮೇಲ್ ವಿಳಾಸ',
-    clerkPasswordLabel: 'ಪಾಸ್‌ವರ್ಡ್',
-    clerkFirstNameLabel: 'ಮೊದಲ ಹೆಸರು',
-    clerkLastNameLabel: 'ಕೊನೆಯ ಹೆಸರು',
-    clerkSignInButton: 'ಸೈನ್ ಇನ್',
-    clerkSignUpButton: 'ಸೈನ್ ಅಪ್',
-    clerkForgotPassword: 'ಪಾಸ್‌ವರ್ಡ್ ಮರೆತಿದ್ದೀರಾ?',
-    clerkRememberMe: 'ನನ್ನನ್ನು ನೆನಪಿಡಿ',
-    clerkOrContinueWith: 'ಅಥವಾ ಇದರೊಂದಿಗೆ ಮುಂದುವರಿಸಿ',
-    clerkAlreadyHaveAccount: 'ಈಗಾಗಲೇ ಖಾತೆ ಇದೆಯೆ?',
-    clerkDontHaveAccount: 'ಖಾತೆ ಇಲ್ಲವೆ?',
-    clerkSignInLink: 'ಸೈನ್ ಇನ್',
-    clerkSignUpLink: 'ಸೈನ್ ಅಪ್',
-    clerkVerifyEmail: 'ನಿಮ್ಮ ಇಮೇಲ್ ಅನ್ನು ಪರಿಶೀಲಿಸಿ',
-    clerkVerifyEmailDescription: 'ನಾವು ನಿಮ್ಮ ಇಮೇಲ್ ವಿಳಾಸಕ್ಕೆ ಪರಿಶೀಲನಾ ಕೋಡ್ ಕಳುಹಿಸಿದ್ದೇವೆ',
-    clerkEnterCode: 'ಪರಿಶೀಲನಾ ಕೋಡ್ ನಮೂದಿಸಿ',
-    clerkResendCode: 'ಕೋಡ್ ಮತ್ತೆ ಕಳುಹಿಸಿ',
-    clerkContinue: 'ಮುಂದುವರಿಸಿ',
-    clerkGoBack: 'ಹಿಂದೆ ಹೋಗಿ',
-    clerkInvalidEmail: 'ದಯವಿಟ್ಟು ಮಾನ್ಯವಾದ ಇಮೇಲ್ ವಿಳಾಸವನ್ನು ನಮೂದಿಸಿ',
-    clerkPasswordTooShort: 'ಪಾಸ್‌ವರ್ಡ್ ಕನಿಷ್ಠ 8 ಅಕ್ಷರಗಳಾಗಿರಬೇಕು',
-    clerkPasswordRequired: 'ಪಾಸ್‌ವರ್ಡ್ ಅಗತ್ಯವಿದೆ',
-    clerkEmailRequired: 'ಇಮೇಲ್ ಅಗತ್ಯವಿದೆ',
-    clerkFirstNameRequired: 'ಮೊದಲ ಹೆಸರು ಅಗತ್ಯವಿದೆ',
-    clerkLastNameRequired: 'ಕೊನೆಯ ಹೆಸರು ಅಗತ್ಯವಿದೆ',
-    clerkSignInError: 'ಅಮಾನ್ಯ ಇಮೇಲ್ ಅಥವಾ ಪಾಸ್‌ವರ್ಡ್',
-    clerkSignUpError: 'ಖಾತೆ ರಚಿಸಲು ಸಾಧ್ಯವಾಗಲಿಲ್ಲ. ದಯವಿಟ್ಟು ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ.',
-    clerkNetworkError: 'ನೆಟ್‌ವರ್ಕ್ ದೋಷ. ದಯವಿಟ್ಟು ನಿಮ್ಮ ಸಂಪರ್ಕವನ್ನು ಪರಿಶೀಲಿಸಿ.',
-    clerkGenericError: 'ಏನೋ ತಪ್ಪಾಗಿದೆ. ದಯವಿಟ್ಟು ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ.',
 
     // Dashboard
     dashboardTitle: 'ಕೃಷಿಕರ ಬಳಗ',
@@ -554,7 +501,7 @@ export const translations = {
     postError: 'ದಯವಿಟ್ಟು ನಿಮ್ಮ ಪೋಸ್ಟ್‌ಗಾಗಿ ಕೆಲವು ಪಠ್ಯವನ್ನು ನಮೂದಿಸಿ.',
     aiExpertOpinion: 'AI ತಜ್ಞರ ಅಭಿಪ್ರಾಯ',
     comments: 'ಪ್ರತಿಕ್ರಿಯೆಗಳು',
-    noPosts: 'ಇನ್ನೂ ಯಾವುದೇ ಸಮುದಾಯ ಪೋಸ್ಟ್‌ಗಳಿಲ್ಲ. ಸಂಭಾಷಣೆಯನ್ನು ಪ್ರಾರಂಭಿಸುವವರಲ್ಲಿ ಮೊದಲಿಗರಾಗಿ!',
+    noPosts: 'ಇನ್ನೂ ಯಾವುದೇ ಸಮುದಾಯ ಪೋಸ್ಟ್‌ಗಳಿಲ್ಲ. ಸಂಭಾಣೆಯನ್ನು ಪ್ರಾರಂಭಿಸುವವರಲ್ಲಿ ಮೊದಲಿಗರಾಗಿ!',
     fromLocation: '{location} ರಿಂದ',
     anonymousUser: 'ಅನಾಮಧೇಯ',
     unknownLocation: 'ಅಪರಿಚಿತ ಸ್ಥಳ',
@@ -565,7 +512,7 @@ export const translations = {
     analyticsDescription: 'ನಿಮ್ಮ ಅಪ್ಲಿಕೇಶನ್ ಬಳಕೆಯನ್ನು ಪರಿಶೀಲಿಸಿ ಮತ್ತು ನೀವು ಹೆಚ್ಚು ಬಳಸುವ ವೈಶಿಷ್ಟ್ಯಗಳನ್ನು ನೋಡಿ.',
     featureUsageTitle: 'ವೈಶಿಷ್ಟ್ಯದ ಬಳಕೆಯ ಎಣಿಕೆ',
     usageDistributionTitle: 'ಬಳಕೆಯ ವಿತರಣೆ',
-    noAnalyticsData: 'ಇನ್ನೂ ಯಾವುದೇ ಚಟುವಟಿಕೆಯ ಡೇಟಾ ಇಲ್ಲ. ನಿಮ್ಮ ವಿಶ್ಲೇಷಣೆಯನ್ನು ನೋಡಲು ಅಪ್ಲಿಕೇಶನ್ ವೈಶಿಷ್ಟ್ಯಗಳನ್ನು ಬಳಸಲು ಪ್ರಾರಂಭಿಸಿ!',
+    noAnalyticsData: 'ಇನ್ನೂ ಯಾವುದೇ ಚಟವಟಿಕೆಯ ಡೇಟಾ ಇಲ್ಲ. ನಿಮ್ಮ ವಿಶ್ಲೇಷಣೆಯನ್ನು ನೋಡಲು ಅಪ್ಲಿಕೇಶನ್ ವೈಶಿಷ್ಟ್ಯಗಳನ್ನು ಬಳಸಲು ಪ್ರಾರಂಭಿಸಿ!',
     totalUsage: 'ಒಟ್ಟು ಸಂವಹನಗಳು',
 
     // About Us
@@ -600,5 +547,19 @@ export const translations = {
     // Contact Us
     contactUsTitle: 'ನಮ್ಮನ್ನು ಸಂಪರ್ಕಿಸಿ',
     contactUsDescription: 'ಪ್ರಶ್ನೆಗಳು, ಪ್ರತಿಕ್ರಿಯೆ ಇದೆಯೇ, ಅಥವಾ ಬೆಂಬಲ ಬೇಕೇ? ನಿಮ್ಮಿಂದ ಕೇಳಲು ನಾವು ಇಷ್ಟಪಡುತ್ತೇವೆ. ಕೆಳಗಿನ ಚಾನಲ್‌ಗಳ ಮೂಲಕ ನಮ್ಮನ್ನು ಸಂಪರ್ಕಿಸಿ.',
+
+    // Onboarding Tour
+    tourNext: 'ಮುಂದೆ',
+    tourBack: 'ಹಿಂದೆ',
+    tourFinish: 'ಮುಕ್ತಾಯ',
+    tourSkip: 'ಬಿಟ್ಟುಬಿಡಿ',
+    tourWelcomeTitle: 'ಕೃಷಿಕರ ಬಳಗಕ್ಕೆ ಸುಸ್ವಾಗತ!',
+    tourWelcomeText: 'ನಿಮ್ಮ ಜಮೀನು ಸಮೃದ್ಧಿಯಾಗಲು ಈ ಅಪ್ಲಿಕೇಶನ್ ಹೇಗೆ ಸಹಾಯ ಮಾಡುತ್ತದೆ ಎಂಬುದನ್ನು ತೋರಿಸಲು ನಾವು ನಿಮ್ಮನ್ನು ತ್ವರಿತ ಪ್ರವಾಸಕ್ಕೆ ಕರೆದೊಯ್ಯುತ್ತೇವೆ.',
+    tourNavTitle: 'ವೈಶಿಷ್ಟ್ಯಗಳನ್ನು ಅನ್ವೇಷಿಸಿ',
+    tourNavText: 'ಬೆಳೆ ವೈದ್ಯ, ಮಾರುಕಟ್ಟೆ ಗುರು ಮತ್ತು ಹೆಚ್ಚಿನ ಸಾಧನಗಳನ್ನು ತ್ವರಿತವಾಗಿ ಪ್ರವೇಶಿಸಲು ಈ ಮೆನುವನ್ನು ಬಳಸಿ.',
+    tourSettingsTitle: 'ನಿಮ್ಮ ಅನುಭವವನ್ನು ವೈಯಕ್ತೀಕರಿಸಿ',
+    tourSettingsText: 'ಇಲ್ಲಿ ಇಂಗ್ಲಿಷ್ ಮತ್ತು ಕನ್ನಡದ ನಡುವೆ ಬದಲಿಸಿ, ಡಾರ್ಕ್ ಮೋಡ್ ಅನ್ನು ಟಾಗಲ್ ಮಾಡಿ ಅಥವಾ ನಿಮ್ಮ ಪ್ರೊಫೈಲ್ ಅನ್ನು ನವೀಕರಿಸಿ.',
+    tourDashboardTitle: 'ನಿಮ್ಮ ಸ್ಮಾರ್ಟ್ ಡ್ಯಾಶ್‌ಬೋರ್ಡ್',
+    tourDashboardText: 'ನಿಮ್ಮ ಚಟುವಟಿಕೆ, ಸ್ಥಳೀಯ ಹವಾಮಾನದ ಅವಲೋಕನ ಮತ್ತು ಎಲ್ಲಾ AI ಸಾಧನಗಳಿಗೆ ತ್ವರಿತ ಪ್ರವೇಶವನ್ನು ಪಡೆಯಿರಿ.',
   },
 };

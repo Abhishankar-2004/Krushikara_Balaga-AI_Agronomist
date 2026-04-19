@@ -9,7 +9,7 @@ import Spinner from './common/Spinner';
 import { LightbulbIcon } from './icons/LightbulbIcon';
 import { BeakerIcon } from './icons/BeakerIcon';
 import { analyticsService } from '../services/analyticsService';
-import { useUser } from '@clerk/clerk-react';
+import { useAuth } from '../AuthContext';
 import { Feature } from '../types';
 import { ScienceIcon } from './icons/ScienceIcon';
 
@@ -48,7 +48,7 @@ const CommonFertilizersInfo: React.FC = () => {
 
 const FertilizerCalculator: React.FC = () => {
   const { language, translate } = useLanguage();
-  const { user } = useUser();
+  const { user } = useAuth();
   const [crop, setCrop] = useState('');
   const [area, setArea] = useState('');
   const [unit, setUnit] = useState('acre');
@@ -58,7 +58,7 @@ const FertilizerCalculator: React.FC = () => {
   const [error, setError] = useState('');
 
   const handleCalculate = useCallback(async () => {
-    if (!crop.trim() || !area.trim() || !user?.emailAddresses[0]?.emailAddress) {
+    if (!crop.trim() || !area.trim() || !user?.email) {
       setError(translate('calculationError'));
       return;
     }
@@ -78,7 +78,7 @@ const FertilizerCalculator: React.FC = () => {
         setError(result.error);
       } else {
         setRecommendation(result);
-        analyticsService.logFeatureUse(Feature.FERTILIZER_CALCULATOR, user.emailAddresses[0]?.emailAddress || '');
+        analyticsService.logFeatureUse(Feature.FERTILIZER_CALCULATOR, user.email);
       }
     } catch (err) {
       setError(translate('aiParsingError'));

@@ -1,4 +1,4 @@
-// Removed storageService - community data now handled differently with Clerk
+import { storageService } from './storageService';
 
 export interface Comment {
     author: string;
@@ -49,11 +49,10 @@ const initialPosts: Post[] = [
 ];
 
 const initializePosts = (): Post[] => {
-    const stored = localStorage.getItem(STORAGE_KEY);
-    let posts = stored ? JSON.parse(stored) : null;
+    let posts = storageService.getItem<Post[]>(STORAGE_KEY);
     if (!posts || posts.length === 0) {
         posts = initialPosts;
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(posts));
+        storageService.setItem(STORAGE_KEY, posts);
     }
     // Ensure old posts have new properties
     posts.forEach(p => {
@@ -78,7 +77,7 @@ export const addPost = (post: Pick<Post, 'author' | 'location' | 'text' | 'image
         likedBy: [],
     };
     const updatedPosts = [newPost, ...posts];
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(updatedPosts));
+    storageService.setItem(STORAGE_KEY, updatedPosts);
     return newPost;
 };
 
@@ -89,7 +88,7 @@ export const addComment = (postId: number, author: string, text: string): Post |
 
     const newComment: Comment = { author, text };
     posts[postIndex].comments.push(newComment);
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(posts));
+    storageService.setItem(STORAGE_KEY, posts);
     return posts[postIndex];
 };
 
@@ -111,6 +110,6 @@ export const toggleLike = (postId: number, userEmail: string): Post | undefined 
         post.likedBy.splice(likedIndex, 1);
     }
 
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(posts));
+    storageService.setItem(STORAGE_KEY, posts);
     return post;
 };
